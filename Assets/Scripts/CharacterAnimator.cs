@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterAnimator : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Animator animator;
+    private Rigidbody rb;
+
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        Vector3 velocity = rb.linearVelocity;
+        velocity.y = 0f;
+
+        animator.SetFloat("CharacterSpeed",
+            velocity.magnitude, 0.1f, Time.deltaTime);
     }
 }
